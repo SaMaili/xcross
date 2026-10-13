@@ -66,24 +66,15 @@ checks. When linking snapshot assembly directly with `ld64.lld`, include
 The verifier checks for a dependency rather than requiring a particular path,
 so indirect linkage through another library remains valid.
 
-## Independent assembly-path observation
+## Motivation and scope
 
-A Linux-hosted experiment on 2026-10-13 used Flutter 3.44.0, engine
-`4c525dac5ebe5971c5708ef73558ed8edcf4a362`, and Dart revision
-`98116461144f4429ab873f8497023a5ec3b08127`. A locally built Product
-`gen_snapshot` generated iOS ARM64 assembly, which clang 21 and ld64.lld 22.1.8
-assembled and linked using iPhoneOS SDK 27.0. The app used xcross signing and
-existing Runner/plugin artifacts.
+This check was motivated by an independent Linux assembly-based experiment:
+a release app installed successfully on an iPhone 17 Pro, but failed to load its
+VM snapshot until its App.framework was linked with libSystem. After re-signing
+and reinstalling, the tester confirmed a Home Screen cold start and basic
+interaction with USB disconnected.
 
-On an iPhone 17 Pro running iOS 27.0.1, the first bundle installed successfully
-but failed before the first Flutter frame. Adding the libSystem dependency,
-re-signing, and reinstalling allowed startup; the tester then confirmed a full
-Home Screen cold start and basic interaction with USB disconnected and no
-debugger or JIT tunnel started for the test.
-
-This observation motivates the loader check and acceptance procedure. It does
-**not** certify a build made by current xcross: the experiment used a custom
-assembly path, while current xcross requests `app-aot-macho-dylib` directly. Nor
-does it establish byte identity with the official Mac compiler or exhaustive
-runtime equivalence. No app binary, signing material, device identifier, or
-unfiltered device log is needed in a validation report.
+Current xcross produces App.framework directly with `app-aot-macho-dylib`.
+The experiment does not establish a defect in that producer. The additional
+check catches this loader-format failure in artifacts being verified; it does
+not change compilation or establish full runtime equivalence.
