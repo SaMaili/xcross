@@ -1,7 +1,7 @@
 name: xcross_workspace
 description: >-
   Workspace root for xcross — the CLI lives in packages/xcross.
-version: 2.0.4
+version: 2.0.6
 publish_to: none
 
 environment:
@@ -17,6 +17,6 @@ workspace:
   - tool/repo_analyzer
 
 dev_dependencies:
-  analyzer: 13.3.0
+  analyzer: 14.5.0
   arxdeus_lints: ^1.0.1
   meta: ^1.19.0

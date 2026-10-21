@@ -2,7 +2,7 @@ name: xcross
 description: >-
   Build, run, and hot-reload Flutter iOS apps natively from Linux and Windows
   with official Swift and LLVM toolchains and no xtool runtime.
-version: 2.0.4
+version: 2.0.6
 repository: https://github.com/arxdeus/xcross
 homepage: https://github.com/arxdeus/xcross
 topics:
@@ -43,7 +43,7 @@ dependencies:
   path: ^1.9.1
   pointycastle: ^4.0.0
   propertylistserialization: ^1.5.0
-  pub_semver: ^2.2.0
+  pub_semver: ^2.2.1
   pure: ^1.0.0
   standard_message_codec: ^0.0.1+5
   vm_service: ^15.3.0
@@ -53,8 +53,8 @@ dependencies:
   yaml_edit: ^2.2.4
 
 dev_dependencies:
-  analyzer: 13.3.0
+  analyzer: 14.5.0
   build_cli: ^2.2.13
   build_runner: ^2.16.1
   embed: ^1.7.1
-  test: ^1.32.0
+  test: ^1.33.0
